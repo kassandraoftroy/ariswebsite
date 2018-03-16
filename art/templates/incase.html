@@ -1,0 +1,158 @@
+<head>
+  <style type="text/css">
+     div:not(.dummy) {
+        border:none;    
+        width:100%;
+        height:180px;
+        word-wrap:break-word;
+        display:flex;
+        align-items:center;
+    }
+  </style>
+</head>
+<h2 style = 'text-align:center;font-family:serif;'>aris website</h2>
+
+<span id = "entrance" style='font-family:serif'>
+    <a style='color:black;text-decoration:none;'><div></div></a>
+    <a style='color:black;text-decoration:none;'><div></div></a>
+    <a style='color:black;text-decoration:none;'><div></div></a>
+</span>
+
+<span id= "site" style = 'text-align:center;color:black;background-color:white;font-family:serif;'>
+    <br><br>
+    <table width='40%' align="center">
+        <tr>
+            <th width="50%"><h2>Art</h2></th>
+            <th width="50%"><h2>Computers</h2></th>
+        </tr>
+        <tr style = 'text-align:center;'>
+            <td>
+                <a target="_blank" href="{% url 'lrt' %}" style='text-decoration:none;color:black;font-family:serif;'>Text Adventure</a><br><br>
+                <a href="{% url 'images' %}" style='text-decoration:none;color:black;font-family:serif;'>Theater Productions</a><br><br>
+                <a href="{% url 'videos' %}" style='text-decoration:none;color:black;font-family:serif;'>Video Archive</a>
+            </td>
+            <td>
+                <a target="_blank" href="http://kassandrastable.com" style='text-decoration:none;color:black;font-family:serif;'>Play My Poker Bot</a><br><br>
+                <a target="_blank" href="http://pythonsemiotics.herokuapp.com/chat" style='text-decoration:none;color:black;font-family:serif;'>Chat With Bots</a><br><br>
+            </td>
+        </tr>
+    </table>
+    <br><br><br>
+    <table align="center" width="65%">
+        <tr>
+            <td style="border-color:grey;border:2px solid black;padding-left:8px">I'm Ari, a theater artist and computer enthusiast working on wide ranging projects.<br>This is my homemade website.<br><br>email:<strong> superarius@gmail.com</strong><br>github: <a target="_blank" href="https://github.com/superarius" style='text-decoration:none;color:black;'><strong>https://github.com/superarius</strong></a><br>send me bitcoin? <a target="_blank" href="https://bitref.com/12P5yGUW9gzjff15evZzck58bJPw7sg1Dm" style='text-decoration:none;color:black;'><strong>12P5yGUW9gzjff15evZzck58bJPw7sg1Dm</strong></a></td>
+            <td>
+                <img style='width:200px;height:auto;' src="https://preview.ibb.co/jTnhKk/mememe.jpg">
+            </td>
+        </tr>
+    </table>
+</span>
+
+<script>
+document.getElementById("site").style.display = "none";
+var all_1 = ["Love", "The ability to move and to be moved", "The possibility of communication, of having effects and being affected, of forces of attraction and repulsion, of the production of change through relationship", "A fiction", "Writing", "What is between bodies, given substance and fed potential by mutual awareness and attention", "Touch"];
+var all_2 = ["Ruptures", "Creates a structural breach in", "Interrupts", "Breaks", "Overrides", "Makes knots in", "Collapses"];
+var all_3 = ["Time", "The continuous progress of events", "The homogeneous linear dimension travelled in a singular determined direction by which we model existence, the occurrence of things, and how these things that exist and occur are ordered and related", "The continuity of consiousness", "The causal chain", "Thought", "The rhythm of experience"];
+var div = document.querySelectorAll('div');
+var div1 = div[0];
+var div2 = div[1];
+var div3 = div[2];
+var dummy = document.createElement('div');
+dummy.className = 'dummy';
+var inSingleLineMode, inMultilineMode;
+div1.innerHTML = all_1[0];
+div2.innerHTML = all_2[0];
+div3.innerHTML = all_3[0];
+var t1 = 0;
+var t2 = 0;
+var t3 = 0;
+adjustFontSize(div1, false);
+adjustFontSize(div2, false);
+adjustFontSize(div3, false);
+
+window.onload = function () {window.setInterval(function(){
+        var x =Math.random();
+        if (x <= .333) {change_text1();}
+        else if (x > .333 && x < .666){change_text2();}
+        else if (x>=.666){change_text3();}
+        else {change_text1();}
+}, 2000);
+};
+
+window.onclick = function (){
+    $("#entrance").hide(500);
+    document.getElementById("site").style.display = "block";
+}
+
+function change_text1(){
+    var rand = Math.floor(Math.random() * all_1.length);
+    while (rand==t1){
+        rand = Math.floor(Math.random() * all_1.length);
+    }
+    t1 = rand;
+    div1.innerHTML = all_1[t1];
+    adjustFontSize(div1, false);
+}
+function change_text2(){
+    var rand = Math.floor(Math.random() * all_1.length);
+    while (rand==t2){
+        rand = Math.floor(Math.random() * all_1.length);
+    }
+    t2 = rand;
+    div2.innerHTML = all_2[t2];
+    adjustFontSize(div2, false);
+}
+function change_text3(){
+    var rand = Math.floor(Math.random() * all_1.length);
+    while (rand==t3){
+        rand = Math.floor(Math.random() * all_1.length);
+    }
+    t3 = rand;
+    div3.innerHTML = all_3[t3];
+    adjustFontSize(div3, false);
+}
+
+function adjustFontSize(element, singleLine){
+    if(!element.innerHTML) return;
+    var elementStyle = getComputedStyle(element);        
+    dummy.style.font = elementStyle.font;
+    initMode(singleLine, function(){ dummy.style.width = elementStyle.width });
+    dummy.style.padding = elementStyle.padding;
+    dummy.style.boxSizing = elementStyle.boxSizing;
+    dummy.innerHTML = element.innerHTML;
+    document.body.appendChild(dummy);
+    var dummyStyle = getComputedStyle(dummy);  
+    
+    while(singleLine ? parseInt(dummyStyle.width) < parseInt(elementStyle.width) :
+                       parseInt(dummyStyle.height) < parseInt(elementStyle.height)){
+        dummy.style.fontSize = parseFloat(dummyStyle.fontSize) + 1 + 'px';
+        dummyStyle = getComputedStyle(dummy);                     
+    }
+    while(singleLine ? parseInt(dummyStyle.width) > parseInt(elementStyle.width) :
+                       parseInt(dummyStyle.height) > parseInt(elementStyle.height)){
+        dummy.style.fontSize = parseFloat(dummyStyle.fontSize) - 1 + 'px';
+        dummyStyle = getComputedStyle(dummy);        
+    }    
+    element.style.fontSize = dummyStyle.fontSize;
+    document.body.removeChild(dummy);
+}
+function initMode(singleLine, callback){
+    if(!dummy) return;
+    if(singleLine&&!inSingleLineMode) {
+        dummy.style.whiteSpace = 'nowrap';
+        dummy.style.width = 'auto';
+        dummy.style.display = "inline-block";
+        inSingleLineMode = true;
+        inMultiLineMode = false;
+    }
+    else if(!singleLine&&!inMultilineMode) {
+        if(callback) callback();
+        dummy.style.whiteSpace = 'initial';
+        dummy.style.display = "block";
+        dummy.style.wordWrap = 'break-word';
+        inMultilineMode = true;
+        inSingleLineMode = false;
+    }
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

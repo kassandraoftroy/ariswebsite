@@ -1,0 +1,30 @@
+<p id='chats'></p>
+<script>
+var all_lines = ["<span style='color:maroon;'><strong>Socrates:</strong></span> Want to talk philosophy?<br>"];
+document.getElementById('chats').innerHTML = all_lines[0];
+function addtext() {
+  newtext = $("#entered").val();
+  all_lines.push("<span style='color:maroon;'><strong>you:</strong></span> " + newtext + "<br>");
+  text = ""
+  if (all_lines.length > 6){
+    x = all_lines.length - 6;
+  } else {
+    x = 0
+  }
+  for(i=x; i<all_lines.length; i++){
+    text += all_lines[i];
+  }
+  document.getElementById('entered').value="";
+  document.getElementById('chats').innerHTML = text;
+  $.ajax({
+      url: "{% url 'ajax_chat' %}",
+      data: {'newtext': newtext},
+      success: function (data) {
+        bot_text = "<span style='color:maroon;'><strong>Socrates:</strong></span> " + data.text + "<br>";
+        all_lines.push(bot_text)
+        text += bot_text;
+        document.getElementById('chats').innerHTML = text;
+      }
+  });
+}
+</script>

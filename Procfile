@@ -1,0 +1,1 @@
+web: gunicorn artswebsite.wsgi --log-file -
